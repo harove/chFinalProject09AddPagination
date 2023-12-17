@@ -73,6 +73,25 @@ export async function updateQuantityOfProductFromCartController(req, res) {
     }
 }
 
+//delete all the products in the cart
+export async function deleteAllProductsFromCartController(req, res) {
+    const cid = req.params.cid
+    try {
+        // const pojo = await manager.addProductToCart({cid,pid})
+        const cart = await manager.findById(cid)
+        if (cart === null){
+            throw new Error('Cart not found')
+        }else{
+            cart.products = []
+            await cart.save()
+            res.json(cart)
+        }
+    } catch (error) {
+        res.status(404).json({
+            mensaje: error.message
+        })
+    }
+}
 
 
 
