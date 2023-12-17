@@ -1,12 +1,13 @@
 import { Router } from 'express';
-import { getController, postController, getByIdController, updateController, deleteController, addProductToCartController, deleteProductFromCartController } from '../controllers/carts.controller.js';
+import { getController, postController, getByIdController, updateController, deleteController, addProductToCartController, deleteProductFromCartController, updateQuantityOfProductFromCartController } from '../controllers/carts.controller.js';
 
 export const cartsRouter = Router()
 cartsRouter.get('/:id', getByIdController)
 cartsRouter.get('/', getController)
-cartsRouter.post('/:cid/product/:pid', addProductToCartController)
-cartsRouter.delete('/:cid/product/:pid', deleteProductFromCartController)
+cartsRouter.post('/:cid/products/:pid', addProductToCartController)
+cartsRouter.delete('/:cid/products/:pid', deleteProductFromCartController)
+cartsRouter.put('/:cid/products/:pid', updateQuantityOfProductFromCartController)
+
 cartsRouter.post('/', postController)
 cartsRouter.put('/:id', updateController)
 cartsRouter.delete('/:id', deleteController)
-

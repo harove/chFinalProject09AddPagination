@@ -34,9 +34,7 @@ export async function addProductToCartController(req, res) {
     try {
         // const pojo = await manager.addProductToCart({cid,pid})
         const cart = await manager.findById(cid)
-        console.log({pid})
         const pidIndex = cart.products.findIndex(product=>product.id === pid)
-        console.log({pidIndex})
         if (pidIndex === -1){
             cart.products.push({id:pid, quantity:1})
             await cart.save()
@@ -52,6 +50,31 @@ export async function addProductToCartController(req, res) {
     }
 }
 
+//uptade the quantity of a product in the cart
+export async function updateQuantityOfProductFromCartController(req, res) {
+    const cid = req.params.cid
+    const pid = req.params.pid
+    const {quantity} = req.body
+    try {
+        // const pojo = await manager.addProductToCart({cid,pid})
+        const cart = await manager.findById(cid)
+        const pidIndex = cart.products.findIndex(product=>product.id === pid)
+        if (pidIndex === -1){
+            throw new Error('Product not found')
+        }else{
+            cart.products[pidIndex] = {...cart.products[pidIndex], quantity}
+        }
+        await cart.save()
+        res.json(cart)
+    } catch (error) {
+        res.status(404).json({
+            mensaje: error.message
+        })
+    }
+}
+
+
+
 
 //delete product from cart
 export async function deleteProductFromCartController(req, res) {
@@ -59,9 +82,7 @@ export async function deleteProductFromCartController(req, res) {
     const pid = req.params.pid
     try {
         const cart = await manager.findById(cid)
-        console.log(util.inspect(cart,false,4))
         const productIndex = cart.products.findIndex(product=>product.id===pid)
-        console.log({productIndex})
         if(productIndex !== -1){
             cart.products.splice(productIndex, 1);
         }else{
