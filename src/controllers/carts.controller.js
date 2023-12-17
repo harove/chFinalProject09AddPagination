@@ -44,6 +44,25 @@ export async function addProductToCartController(req, res) {
 }
 
 
+//delete product from cart
+export async function deleteProductFromCartController(req, res) {
+    const cid = req.params.cid
+    const pid = req.params.pid   
+    try {
+        const cart = await manager.findById(cid)
+        console.log({cart})
+        const productIndex = cart.products.findIndex(product=>product._id===pid)
+        // cart.save()
+        // res.json(cart)
+    } catch (error) {
+        res.status(404).json({
+            mensaje: error.message
+        })
+    }
+}
+
+
+
 
 //additional to the challenge. 
 
@@ -72,8 +91,9 @@ export async function updateController(req, res) {
 export async function deleteController(req, res) {
     const id = req.params.id
     try {
-        const pojos = await manager.delete(id)
-        res.json(pojos)
+        // const pojos = await manager.delete(id)
+        const pojo = await manager.findByIdAndDelete(id)
+        res.json(pojo)
     } catch (error) {
         res.status(404).json({
             mensaje: error.message

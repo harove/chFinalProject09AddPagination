@@ -1,6 +1,6 @@
+import util from 'node:util'
 // import { productsManager as manager } from "../dao/productsManager.js"
 import { productsManager as manager } from "../dao/index.js"
-
 
 export async function postController(req, res) {
     const pojo = req.body
@@ -16,10 +16,25 @@ export async function postController(req, res) {
 
 
 export async function getController(req, res) {
-    const {limit} = req.query
+    const {page = 1,limit = 10, sort, ...query} = req.query
     // const pojos = await manager.findAll({limit})
-    const pojos = await manager.find().lean()
-    res.json(pojos)
+    const options = {page, limit}
+    if (sort)
+      options.sort = {price: sort}
+
+    try {
+        const {docs: payload, prevPage, nextPage,  ...rest} = await manager.paginate(query, options)
+        const response = {
+            status: 'success',
+            payload,
+            ...rest,
+            prevLink: rest.hasPrevPage ? `/api/products?page=${rest.prevPage}&limit=${rest.limit}` : null,
+            nextLink: rest.hasNextPage ? `/api/products?page=${rest.nextPage}&limit=${rest.limit}` : null,
+        }
+        res.status(200).json(response)
+    } catch (error) {
+    
+    }
 }
 
 export async function getByIdController(req, res) {

@@ -1,5 +1,7 @@
 import { Schema, model } from 'mongoose'
 import {randomUUID} from 'node:crypto'
+import mongoosePaginate from 'mongoose-paginate-v2'
+
 
 const productsSchema = new Schema({
     // _id: {type: String, default: randomUUID()},
@@ -16,6 +18,9 @@ const productsSchema = new Schema({
     strict: 'throw',
     versionKey: false,
 })
+
+
+productsSchema.plugin(mongoosePaginate)
 
 export const manager = model('products', productsSchema)
 
