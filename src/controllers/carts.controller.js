@@ -1,5 +1,6 @@
 // import { cartsManager as manager } from "../dao/cartsManager.js"
 import { cartsManager as manager } from "../dao/index.js"
+import mongoose from 'mongoose';
 import util from 'node:util'
 
 //creating cart
@@ -34,17 +35,16 @@ export async function addProductToCartController(req, res) {
     try {
         // const pojo = await manager.addProductToCart({cid,pid})
         const cart = await manager.findById(cid)
-        const pidIndex = cart.products.findIndex(product=>product.id === pid)
+        const pidIndex = cart.products.findIndex(product=> new mongoose.Types.ObjectId(product._id).equals(pid))
         if (pidIndex === -1){
-            cart.products.push({id:pid, quantity:1})
-            await cart.save()
+            cart.products.push({_id:pid, quantity:1})
         }else{
-            cart.products[pidIndex] = {...cart.products[pidIndex], quantity: cart.products[pidIndex].quantity+1}
+            cart.products[pidIndex].quantity += 1;
         }
         await cart.save()
         res.json(cart)
     } catch (error) {
-        res.status(404).json({
+        res.status(400).json({
             mensaje: error.message
         })
     }
