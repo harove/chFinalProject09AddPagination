@@ -10,11 +10,13 @@
             <div class="col border border-1">{{title}}</div>
             <div class="col border border-1">{{code}}</div> 
             <div class="col border border-1">{{price}}</div> 
-            <div class="col border border-1">Ver</div> 
+            <div class="col border border-1">
+              <a href="/products/{{_id}}">View</a>
+            </div> 
         </li>
         {{/each}}
     </ul>
-    <div class="row pagination justify-content-center"> page {{payload.page}} from {{payload.totalDocs}}</div>
+    <div class="row pagination justify-content-center"> page {{payload.page}} from {{payload.totalPages}}</div>
     {{else}}
     <p>No hay productos para mostrar</p>
     {{/if}}
