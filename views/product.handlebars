@@ -1,0 +1,14 @@
+<div class="container">
+    <h1 class="row justify-content-center">{{titulo}}</h1>
+        <script>
+        {{log payload}}
+        </script>
+    <ul>
+        {{#each payload as |value key|}}
+        <li class="row">
+            <div class="col border border-1">{{key}}</div>
+            <div class="col border border-1">{{value}}</div>
+        </li>
+        {{/each}}
+    </ul>
+</div>

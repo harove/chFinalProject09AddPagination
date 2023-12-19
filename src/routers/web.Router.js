@@ -1,10 +1,14 @@
 import { Router } from 'express';
 // import { productsManager as manager } from '../dao/productsManager.js';
 import { productsManager as manager } from '../dao/index.js';
-import { getController } from '../controllers/web/products.controller.js';
+import { getByIdController, getController } from '../controllers/web/products.controller.js';
 
 export const webRouter = Router();
 webRouter.get('/products', getController);
+webRouter.get('/products/:id', getByIdController);
+
+
+
 
 webRouter.get('/realtimeproducts', async (req, res) => {
     // const products = await manager.findAll();

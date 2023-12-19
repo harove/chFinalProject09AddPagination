@@ -27,7 +27,17 @@ export async function getController(req, res) {
     }
 }
 
-
-
+export async function getByIdController(req, res) {
+    const {id} = req.params
+    try {
+        const pojo = await manager.findById(id).lean()
+        res.render('product.handlebars', {
+            payload:pojo,
+            titulo: 'Product',
+        });
+    } catch (error) {
+        res.send(error.message)
+    }
+}
 
 
