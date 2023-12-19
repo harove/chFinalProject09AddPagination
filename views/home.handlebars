@@ -1,10 +1,14 @@
 <h1>{{titulo}}</h1>
-{{#if products}}
+    <script>
+    {{log payload}}
+    </script>
+{{#if render}}
 <ul>
-    {{#each products}}
-    <li>{{this.title}} {{this.code}}</li>
+    {{#each payload.payload}}
+    <li>{{title}} {{code}}</li>
     {{/each}}
 </ul>
+{{payload.totalDocs}}
 {{else}}
 <p>No hay productos para mostrar</p>
 {{/if}}

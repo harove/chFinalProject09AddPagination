@@ -1,5 +1,5 @@
 // import { cartsManager as manager } from "../dao/cartsManager.js"
-import { cartsManager as manager } from "../dao/index.js"
+import { cartsManager as manager } from "../../dao/index.js"
 import mongoose from 'mongoose';
 import util from 'node:util'
 

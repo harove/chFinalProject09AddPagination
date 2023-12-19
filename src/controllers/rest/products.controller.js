@@ -1,6 +1,6 @@
 import util from 'node:util'
 // import { productsManager as manager } from "../dao/productsManager.js"
-import { productsManager as manager } from "../dao/index.js"
+import { productsManager as manager } from "../../dao/index.js"
 
 export async function postController(req, res) {
     const pojo = req.body
