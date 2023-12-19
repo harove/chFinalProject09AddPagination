@@ -5,10 +5,10 @@ import { productsManager as manager } from "../../dao/index.js"
 export async function getController(req, res) {
     const sort = 'asc'
     const query = {} 
-    const options = {page:1, limit:10, sort:{price:sort}}
+    const {page=1, limit=10} = req.query
 
     try {
-        const response = await manager.paginate(query, options)
+        const response = await manager.paginate(query, {page})
         const {docs, prevPage, nextPage,  ...rest} = response
         const paginatedProducts = {
             status: 'success',

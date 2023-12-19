@@ -16,7 +16,15 @@
         </li>
         {{/each}}
     </ul>
-    <div class="row pagination justify-content-center"> page {{payload.page}} from {{payload.totalPages}}</div>
+    <div class="row pagination justify-content-center"> 
+        <div class="col-auto">
+            
+            <span>
+                page <a class="" href="/products?page={{payload.page}}">{{payload.page}}</a></span> from  
+                <a class="" href="/products?page={{payload.totalPages}}">{{payload.totalPages}}</a>
+            </span>
+        </div>
+    </div>
     {{else}}
     <p>No hay productos para mostrar</p>
     {{/if}}
