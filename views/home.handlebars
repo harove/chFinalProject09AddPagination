@@ -18,11 +18,20 @@
     </ul>
     <div class="row pagination justify-content-center"> 
         <div class="col-auto">
-            
+            {{#if payload.hasPrevPage}}
             <span>
-                page <a class="" href="/products?page={{payload.page}}">{{payload.page}}</a></span> from  
-                <a class="" href="/products?page={{payload.totalPages}}">{{payload.totalPages}}</a>
+                <a class="text-decoration-none" href="{{payload.prevLink}}"> &#60; </a>
             </span>
+            {{/if}}
+            <span>
+                page <a class="text-decoration-none" href="/products?page={{payload.page}}">{{payload.page}}</a></span> from  
+                <a class="class=text-decoration-none" href="/products?page={{payload.totalPages}}">{{payload.totalPages}}</a>
+            </span>
+            {{#if payload.hasNextPage}}
+            <span>
+                <a class="text-decoration-none" href="{{payload.nextLink}}"> &#62; </a>
+            </span>
+            {{/if}}
         </div>
     </div>
     {{else}}
