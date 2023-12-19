@@ -1,16 +1,23 @@
-<h1>{{titulo}}</h1>
-    <script>
-    {{log payload}}
-    </script>
-{{#if render}}
-<ul>
-    {{#each payload.payload}}
-    <li>{{title}} {{code}}</li>
-    {{/each}}
-</ul>
-{{payload.totalDocs}}
-{{else}}
-<p>No hay productos para mostrar</p>
-{{/if}}
-<script src="/socket.io/socket.io.js"></script>
-<script src="/static/js/realtime.js"></script>
+<div class="container">
+    <h1 class="row justify-content-center">{{titulo}}</h1>
+        <script>
+        {{log payload}}
+        </script>
+    {{#if render}}
+    <ul>
+        {{#each payload.payload}}
+        <li class="row">
+            <div class="col border border-1">{{title}}</div>
+            <div class="col border border-1">{{code}}</div> 
+            <div class="col border border-1">{{price}}</div> 
+            <div class="col border border-1">Ver</div> 
+        </li>
+        {{/each}}
+    </ul>
+    <div class="row pagination justify-content-center"> page {{payload.page}} from {{payload.totalDocs}}</div>
+    {{else}}
+    <p>No hay productos para mostrar</p>
+    {{/if}}
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/static/js/realtime.js"></script>
+</div>
