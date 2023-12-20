@@ -6,11 +6,17 @@ import util from 'node:util'
 //creating cart
 export async function postController(req, res) {
     const pojo = req.body
-    await manager.create(pojo)
-    // const pojos = await manager.findAll()
-    const pojos = await manager.find().lean()
-    pojos.push(pojo)
-    res.json(pojo)
+    try {
+        const document = await manager.create(pojo)
+        // const pojos = await manager.findAll()
+        const pojos = await manager.find().lean()
+        pojos.push(pojo)
+        res.json(document.toObject())
+    } catch (error) {
+        res.status(400).json({
+            message: error.message
+        })
+    }
 }
 
 //listing products in cart x

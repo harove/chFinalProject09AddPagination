@@ -33,6 +33,7 @@ export async function getByIdController(req, res) {
         const pojo = await manager.findById(id).lean()
         res.render('product.handlebars', {
             payload:pojo,
+            payloadJs: JSON.stringify(pojo),
             titulo: 'Product',
         });
     } catch (error) {
