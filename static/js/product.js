@@ -1,11 +1,5 @@
-const httpClient = (url,method) => fetch(url, {
-    method,
-    headers: {
-        'Content-Type': 'application/json',
-    },
-})
-
-  // Retrieve the payload data from the data attribute
+import { httpClient } from './httpClient.js';
+// Retrieve the payload data from the data attribute
   const payloadDataElement = document.getElementById('payload-data');
   const payloadDataString = payloadDataElement.dataset.payload;
   const payload = JSON.parse(payloadDataString)
